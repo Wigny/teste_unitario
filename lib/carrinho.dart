@@ -1,14 +1,13 @@
 import 'package:carrinho_de_compras/produto.dart';
 
 class Carrinho {
-  final List<Produto> produtos;
+  List<Produto> produtos;
 
   Carrinho({
-    this.produtos,
+    this.produtos = [],
   });
 
-  double get total {
-    return produtos.fold(
-        0, (previousValue, element) => previousValue + element.total);
-  }
+  double get total => produtos.fold(
+        0, (previousValue, element) => previousValue + element.total
+        );
 }

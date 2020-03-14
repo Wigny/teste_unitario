@@ -1,12 +1,12 @@
 class Produto {
-  final double preco;
-  final String nome;
-  final int quantidade;
+  double preco;
+  String nome;
+  int quantidade;
 
   Produto({
-    this.preco,
-    this.nome,
-    this.quantidade,
+    @required this.nome,
+    this.preco = 0,
+    this.quantidade = 1,
   });
 
   double get total => quantidade * preco;

@@ -4,7 +4,7 @@ class Carrinho {
   List<Produto> produtos;
 
   Carrinho({
-    this.produtos = [],
+    this.produtos = const [],
   });
 
   double get total => produtos.fold(

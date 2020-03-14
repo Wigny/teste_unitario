@@ -4,7 +4,7 @@ class Produto {
   int quantidade;
 
   Produto({
-    @required this.nome,
+    this.nome = '',
     this.preco = 0,
     this.quantidade = 1,
   });

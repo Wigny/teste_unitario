@@ -1,11 +1,35 @@
 import 'package:carrinho_de_compras/carrinho.dart';
+import 'package:carrinho_de_compras/produto.dart';
+
 import 'package:test/test.dart';
 
 void main() {
-  group('Testar carrinho', () {
-    test('Testar carrinho vazio', () {
-      var carrinho = Carrinho();
+  group('Carrinho', () {
+    test('deve ter valor total zero', () {
+      final Carrinho carrinho = Carrinho();
       expect(carrinho.total, 0);
+    });
+
+    test('deve ter valor total 45', () {
+      final Carrinho carrinho = Carrinho(
+        produtos: <Produto>[
+          Produto(
+            nome: 'Caneta',
+            quantidade: 5,
+            desconto: 0.2,
+            preco: 10,
+          ),
+        ],
+      );
+
+      carrinho.produtos.add(
+        Produto(
+          nome: 'Borracha',
+          preco: 5,
+        ),
+      );
+
+      expect(carrinho.total, 45);
     });
   });
 }

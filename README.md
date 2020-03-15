@@ -1,3 +1,6 @@
+
+![](https://github.com/wigny/teste_unitario/workflows/Dart%20CI/badge.svg)
+
 A sample command-line application with an entrypoint in `bin/`, library code
 in `lib/`, and example unit test in `test/`.
 

@@ -10,7 +10,7 @@ void main() {
       expect(carrinho.total, 0);
     });
 
-    test('deve ter valor total 45', () {
+    test('deve ter valor total 40', () {
       final Carrinho carrinho = Carrinho(
         produtos: <Produto>[
           Produto(
@@ -22,14 +22,7 @@ void main() {
         ],
       );
 
-      carrinho.produtos.add(
-        Produto(
-          nome: 'Borracha',
-          preco: 5,
-        ),
-      );
-
-      expect(carrinho.total, 45);
+      expect(carrinho.total, 40);
     });
   });
 }

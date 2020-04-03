@@ -1,7 +1,7 @@
 class Cliente {
   Cliente({
     this.nome = '',
-    this.cpf = '',
+    this.cpf,
   });
 
   String nome;

@@ -1,29 +1,64 @@
+import 'dart:io';
+
 import 'package:carrinho_de_compras/carrinho.dart';
 import 'package:carrinho_de_compras/cliente.dart';
 import 'package:carrinho_de_compras/produto.dart';
 
 void main() {
   final Carrinho carrinho = Carrinho(
-    cliente: Cliente(
-      nome: 'Wígny',
-      cpf: '045.434.132-61',
-    ),
-    produtos: <Produto>[
-      Produto(
-        nome: 'Caneta',
-        quantidade: 5,
-        desconto: 0.2,
-        preco: 10,
-      ),
-      Produto(
-        nome: 'Borracha',
-        quantidade: 10,
-        preco: 5,
-        desconto: 0.5,
-      ),
-    ],
+    cliente: cliente,
+    produtos: produtos,
   );
 
-  print(
-      'Carrinho do ${carrinho.cliente.nome} tem valor total de R\$${carrinho.total}');
+  writeLine(
+    'Carrinho do ${carrinho.cliente.nome} tem valor total de R\$${carrinho.total.toStringAsFixed(2)}',
+  );
+}
+
+Cliente get cliente {
+  final Cliente cliente = Cliente();
+  cliente.nome = readLine('Nome do cliente: ');
+  final bool hasCpf = readLine('CPF na nota? (S/n) ') != 'n';
+
+  if (hasCpf) {
+    cliente.cpf = readLine('CPF do cliente: ');
+  }
+  return cliente;
+}
+
+List<Produto> get produtos {
+  final List<Produto> produtos = <Produto>[];
+
+  do {
+    produtos.add(produto);
+  } while (readLine('Adicionar outro produto? (S/n) ') != 'n');
+
+  return produtos;
+}
+
+Produto get produto {
+  final Produto produto = Produto();
+
+  produto.nome = readLine(
+    '\nProduto: ',
+  );
+  produto.preco = double.tryParse(
+        readLine('Preço: '),
+      ) ??
+      0;
+  produto.quantidade = int.tryParse(
+        readLine('Quantidade: '),
+      ) ??
+      1;
+
+  return produto;
+}
+
+String readLine(String description) {
+  stdout.write(description);
+  return stdin.readLineSync();
+}
+
+void writeLine(String description) {
+  stdout.writeln(description);
 }

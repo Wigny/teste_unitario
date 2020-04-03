@@ -18,9 +18,8 @@ void main() {
 Cliente get cliente {
   final Cliente cliente = Cliente();
   cliente.nome = readLine('Nome do cliente: ');
-  final bool hasCpf = readLine('CPF na nota? (S/n) ') != 'n';
 
-  if (hasCpf) {
+  if (readLine('CPF na nota? (S/n) ') != 'n') {
     cliente.cpf = readLine('CPF do cliente: ');
   }
   return cliente;

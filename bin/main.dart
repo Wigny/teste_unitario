@@ -11,8 +11,12 @@ void main() {
   );
 
   writeLine(
-    'Carrinho do ${carrinho.cliente.nome} tem valor total de R\$${carrinho.total.toStringAsFixed(2)}',
+    '\nCarrinho do ${carrinho.cliente.nome} tem valor total de R\$${carrinho.total.toStringAsFixed(2)}',
   );
+
+  if (readLine('Imprimir comprovante? (S/n) ') != 'n') {
+    writeComprovante(carrinho);
+  }
 }
 
 Cliente get cliente {
@@ -60,4 +64,29 @@ String readLine(String description) {
 
 void writeLine(String description) {
   stdout.writeln(description);
+}
+
+Future<void> writeComprovante(Carrinho carrinho) async {
+  final IOSink comprovante = File('comprovantes.txt').openWrite(
+    mode: FileMode.append,
+  );
+
+  comprovante.writeln('-------- CLIENTE --------');
+  comprovante.writeln('NOME: ${carrinho.cliente.nome}');
+  if (carrinho.cliente.cpf != null) {
+    comprovante.writeln('CPF: ${carrinho.cliente.cpf}');
+  }
+
+  comprovante.writeln('-------- PRODUTOS -------');
+  for (final Produto p in carrinho.produtos) {
+    comprovante.writeln(
+      '${p.quantidade} ${p.nome}: R\$${p.total.toStringAsFixed(2)}',
+    );
+  }
+
+  comprovante.writeln('--------- TOTAL ---------');
+  comprovante.writeln('TOTAL: R\$${carrinho.total.toStringAsFixed(2)}');
+  comprovante.writeln('-------------------------\n');
+
+  await comprovante.close();
 }
